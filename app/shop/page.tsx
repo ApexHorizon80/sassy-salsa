@@ -1,2 +1,9 @@
-export const metadata = { title: 'Shop salsa' };
-export { default } from '../page';
+'use client';
+import { useEffect, useState } from 'react';
+import { Brand } from '@/components/Brand';
+import { AuthNav } from '@/components/AuthNav';
+import { ProductGrid } from '@/components/ProductGrid';
+import { CartDrawer, CartLine } from '@/components/CartDrawer';
+import { CheckoutModal } from '@/components/CheckoutModal';
+import { Product } from '@/lib/products';
+export default function ShopPage() { const [products,setProducts]=useState<Product[]>([]); const [cart,setCart]=useState<CartLine[]>([]); const [open,setOpen]=useState(false); const [checkout,setCheckout]=useState(false); useEffect(()=>{fetch('/api/products').then((r)=>r.json()).then((data)=>setProducts(Array.isArray(data)?data:[]));},[]); const add=(index:number)=>{setCart((lines)=>{const found=lines.find((line)=>line.index===index);return found?lines.map((line)=>line.index===index?{...line,quantity:Math.min(line.quantity+1,products[index].quantity)}:line):[...lines,{index,quantity:1}];});setOpen(true);}; const change=(index:number,delta:number)=>setCart((lines)=>lines.map((line)=>line.index===index?{...line,quantity:line.quantity+delta}:line).filter((line)=>line.quantity>0)); return <><div className="announcement">Free local pickup on orders $35+ <span>·</span> Small batch, made with love</div><header className="site-header"><Brand/><nav><a href="/shop">Shop</a><a href="/">Our story</a><a href="/">FAQ</a></nav><div className="header-actions"><AuthNav/><button className="cart-btn" onClick={()=>setOpen(true)}>Cart <b>{cart.reduce((n,line)=>n+line.quantity,0)}</b></button></div></header><main className="shop-page"><div className="shop-hero"><p className="eyebrow">The Sassy lineup</p><h1>Pick your <em>perfect</em> heat.</h1><p>Four small-batch flavors made for dipping, drizzling, and passing around.</p></div><ProductGrid products={products} onAdd={add}/></main><CartDrawer open={open} lines={cart} products={products} onClose={()=>setOpen(false)} onChange={change} onCheckout={()=>{setOpen(false);setCheckout(true)}}/><CheckoutModal open={checkout} lines={cart} products={products} onClose={()=>{setCheckout(false);setCart([])}}/></>; }
