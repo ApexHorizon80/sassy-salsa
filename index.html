@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sassy Salsa — Small batch. Big flavor.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="announcement">Free local pickup on orders $35+ <span>·</span> Small batch, made with love in Austin</div>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Sassy Salsa home"><span class="brand-mark">S</span><span>SASSY<br><i>SALSA</i></span></a>
+    <nav><a href="#shop">Shop</a><a href="#story">Our story</a><a href="#faq">FAQ</a></nav>
+    <div class="header-actions"><button class="icon-btn" aria-label="Search" onclick="toast('Search coming right up')">⌕</button><button class="icon-btn" aria-label="Account" onclick="showAccount()">♙</button><button class="cart-btn" onclick="openCart()">Cart <b id="cartCount">0</b></button></div>
+  </header>
+
+  <main>
+    <section id="home" class="hero"><div class="hero-copy"><p class="eyebrow">Sassy by name. Saucy by nature.</p><h1>Made for<br><em>good</em> company.</h1><p class="hero-sub">Small-batch salsa with big personality. Four bright, chunky flavors made for dipping, drizzling, and passing around.</p><div class="hero-ctas"><a class="btn btn-primary" href="#shop">Shop all salsa <span>→</span></a><a class="text-link" href="#story">Meet the makers <span>↗</span></a></div><div class="hero-note"><span class="stars">★★★★★</span><span>4.9 from 120+ salsa lovers</span></div></div><div class="hero-art"><div class="sun"></div><div class="jar jar-hero"><div class="jar-lid"></div><div class="jar-label"><small>SASSY</small><strong>SALSA</strong><span>ORIGINAL RECIPE</span></div></div><div class="pepper pepper-a">✳</div><div class="pepper pepper-b">✳</div><span class="scribble">dip<br>happy</span></div></section>
+
+    <section class="ticker"><span>• NO WEIRD STUFF</span><span>• REAL INGREDIENTS</span><span>• SMALL BATCH</span><span>• BIG FLAVOR</span><span>• NO WEIRD STUFF</span></section>
+    <section id="shop" class="shop-section"><div class="section-heading"><div><p class="eyebrow">Meet the lineup</p><h2>Pick your <em>perfect</em> heat.</h2></div><a class="text-link" href="#shop">View all flavors <span>→</span></a></div><div class="product-grid" id="productGrid"></div></section>
+
+    <section id="story" class="story"><div class="story-image"><div class="story-plate">🌶️<br><span>made<br>with<br>heart</span></div></div><div class="story-copy"><p class="eyebrow">A little bit of sass</p><h2>Recipes worth<br><em>gathering</em> for.</h2><p>We started Sassy Salsa because the best nights always seem to happen around a good bowl of salsa. So we make ours the old-fashioned way: bright produce, bold spices, and a whole lot of tasting.</p><a class="btn btn-outline" href="#faq">Our story <span>↗</span></a></div></section>
+
+    <section class="callout"><p class="eyebrow">Need it now?</p><h2>Good news.<br><em>We do express.</em></h2><p>Order online, choose local pickup, and we'll have your salsa ready in as little as 2 hours.</p><button class="btn btn-light" onclick="toast('Express ordering is ready at checkout!')">Start an express order <span>→</span></button></section>
+    <section id="faq" class="faq"><p class="eyebrow">Questions, answered</p><h2>Frequently <em>saucy</em> questions.</h2><details><summary>Where do you offer pickup? <span>+</span></summary><p>We offer local pickup in Austin, TX. Choose pickup at checkout and we'll send your ready notification.</p></details><details><summary>How spicy is each salsa? <span>+</span></summary><p>Green is mild/medium, Red is medium, Verde is medium/hot, and Habanero brings the heat.</p></details><details><summary>Do you ship? <span>+</span></summary><p>Not yet — we're keeping it local and fresh while we grow. Join the list for updates.</p></details></section>
+  </main>
+  <footer><a class="brand" href="#home"><span class="brand-mark">S</span><span>SASSY<br><i>SALSA</i></span></a><p>Small batch. Big flavor. Zero boring bites.</p><div><a href="#shop">Shop</a><a href="#story">Our story</a><a href="#faq">FAQ</a></div></footer>
+  <div class="toast" id="toast"></div>
+  <div class="drawer-backdrop" id="backdrop" onclick="closeCart()"></div><aside class="cart-drawer" id="drawer"><div class="drawer-top"><h2>Your cart</h2><button onclick="closeCart()">×</button></div><div id="cartItems"></div><div class="cart-bottom"><div><span>Subtotal</span><strong id="subtotal">$0.00</strong></div><button class="btn btn-primary" onclick="checkout()">Continue to checkout <span>→</span></button></div></aside>
+  <script src="app.js"></script>
+</body></html>
