@@ -10,7 +10,8 @@ export function getProductAvailability(product: Pick<Product, 'quantity' | 'preo
 function normalize(row: Record<string, unknown>): Product {
   const name = String(row.name); const slug = String(row.slug);
   const inventory = Array.isArray(row.inventory) ? row.inventory[0] as Record<string, unknown> | undefined : row.inventory as Record<string, unknown> | undefined;
-  return { ...row, id: String(row.id), name, slug, description: String(row.description ?? ''), price: Number(row.price), jar_size: String(row.jar_size), heat_level: String(row.heat_level), image_url: String(row.image_url ?? ''), is_active: Boolean(row.is_active), preorder_enabled: Boolean(row.preorder_enabled), preorder_available_date: row.preorder_available_date ? String(row.preorder_available_date) : null, quantity: Number(inventory?.quantity ?? row.quantity ?? 0), image: slug.replace('-salsa', ''), heat: String(row.heat_level), size: String(row.jar_size) };
+  const assetBySlug: Record<string, string> = { 'green-salsa': '/products/green-salsa.png', 'red-salsa': '/products/red-salsa.png', 'verde-salsa': '/products/verde-salsa.png', 'habanero-salsa': '/products/habanero-salsa.png' };
+  return { ...row, id: String(row.id), name, slug, description: String(row.description ?? ''), price: Number(row.price), jar_size: String(row.jar_size), heat_level: String(row.heat_level), image_url: assetBySlug[slug] ?? String(row.image_url ?? ''), is_active: Boolean(row.is_active), preorder_enabled: Boolean(row.preorder_enabled), preorder_available_date: row.preorder_available_date ? String(row.preorder_available_date) : null, quantity: Number(inventory?.quantity ?? row.quantity ?? 0), image: slug.replace('-salsa', ''), heat: String(row.heat_level), size: String(row.jar_size) };
 }
 
 export async function getProducts(): Promise<Product[]> {
