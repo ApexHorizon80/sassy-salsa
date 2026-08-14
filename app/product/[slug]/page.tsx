@@ -1,0 +1,3 @@
+import { products } from '@/lib/products';
+export function generateStaticParams() { return products.map(product => ({ slug: product.slug })); }
+export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) { const { slug } = await params; const product = products.find(p => p.slug === slug); if (!product) return <main><h1>Product not found</h1></main>; return <main style={{ padding: '8vw' }}><p className="eyebrow">Sassy Salsa</p><h1>{product.name}</h1><p>{product.heat} · {product.size}</p><p>${product.price}.00</p><a className="btn btn-primary" href="/">Back to shop <span>→</span></a></main>; }
