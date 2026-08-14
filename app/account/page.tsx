@@ -1,5 +1,2 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { getSupabaseBrowserClient } from '@/lib/supabase';
-export default function AccountPage() { const router = useRouter(); const [user, setUser] = useState<{ email?: string; name?: string } | null>(null); const [loading, setLoading] = useState(true); useEffect(() => { const client = getSupabaseBrowserClient(); if (!client) { router.replace('/sign-in'); return; } client.auth.getSession().then(({ data }) => { if (!data.session) router.replace('/sign-in'); else setUser({ email: data.session.user.email, name: data.session.user.user_metadata?.full_name }); setLoading(false); }); }, [router]); const signOut = async () => { const client = getSupabaseBrowserClient(); if (client) await client.auth.signOut(); router.replace('/'); }; if (loading) return <main className="auth-page"><p>Loading account…</p></main>; if (!user) return null; return <main className="auth-page"><section className="auth-form"><p className="eyebrow">Sassy Salsa</p><h1>Your account</h1><p><strong>{user.name || 'Salsa lover'}</strong></p><p>{user.email}</p><button className="btn btn-primary" onClick={signOut}>Sign Out</button></section></main>; }
+import { AccountPortal } from '@/components/AccountPortal';
+export default function AccountPage() { return <AccountPortal />; }
