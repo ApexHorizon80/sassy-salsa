@@ -1,2 +1,3 @@
 import { AdminDashboard } from '@/components/AdminDashboard';
-export default function AdminPage() { return <AdminDashboard />; }
+import { AdminProductCreate } from '@/components/AdminProductCreate';
+export default function AdminPage() { return <><AdminProductCreate /><AdminDashboard /></>; }
